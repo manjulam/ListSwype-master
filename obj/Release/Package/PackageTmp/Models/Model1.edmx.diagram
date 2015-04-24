@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="df8754a36f29450f9242b01338bf987e" Name="Diagram1">
+        <EntityTypeShape EntityType="listswypeModel.commonlist" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="listswypeModel.customlist" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="listswypeModel.user" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="listswypeModel.userconnection" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="listswypeModel.userlist" Width="1.5" PointX="5.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="listswypeModel.userlocation" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <AssociationConnector Association="listswypeModel.fk_userlist_list" ManuallyRouted="false" />
+        <AssociationConnector Association="listswypeModel.fk_customlist_user" ManuallyRouted="false" />
+        <AssociationConnector Association="listswypeModel.fk_userlist_custom" ManuallyRouted="false" />
+        <AssociationConnector Association="listswypeModel.fk_connection_user_1" ManuallyRouted="false" />
+        <AssociationConnector Association="listswypeModel.fk_connection_user_2" ManuallyRouted="false" />
+        <AssociationConnector Association="listswypeModel.fk_userlist_user" ManuallyRouted="false" />
+        <AssociationConnector Association="listswypeModel.fk_userlocation_user" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

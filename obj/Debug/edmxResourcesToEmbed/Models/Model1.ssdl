@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="listswypeModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="commonlist">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ItemName" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="ItemImage" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="customlist">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userid" Type="int" Nullable="false" />
+    <Property Name="itemname" Type="varchar" MaxLength="100" />
+    <Property Name="itemimage" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="LastName" Type="varchar" MaxLength="200" />
+    <Property Name="Email" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="userconnection">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userid" Type="int" Nullable="false" />
+    <Property Name="connectionid" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="userlist">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userid" Type="int" Nullable="false" />
+    <Property Name="listid" Type="int" />
+    <Property Name="customitemid" Type="int" />
+  </EntityType>
+  <EntityType Name="userlocation">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userid" Type="int" Nullable="false" />
+    <Property Name="locationname" Type="varchar" MaxLength="200" />
+    <Property Name="locationcoord" Type="decimal" Precision="9" Scale="6" />
+  </EntityType>
+  <Association Name="fk_connection_user_1">
+    <End Role="user" Type="Self.user" Multiplicity="1" />
+    <End Role="userconnection" Type="Self.userconnection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="userconnection">
+        <PropertyRef Name="userid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_connection_user_2">
+    <End Role="user" Type="Self.user" Multiplicity="1" />
+    <End Role="userconnection" Type="Self.userconnection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="userconnection">
+        <PropertyRef Name="connectionid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_customlist_user">
+    <End Role="user" Type="Self.user" Multiplicity="1" />
+    <End Role="customlist" Type="Self.customlist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="customlist">
+        <PropertyRef Name="userid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_userlist_custom">
+    <End Role="customlist" Type="Self.customlist" Multiplicity="0..1" />
+    <End Role="userlist" Type="Self.userlist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customlist">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="userlist">
+        <PropertyRef Name="customitemid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_userlist_list">
+    <End Role="commonlist" Type="Self.commonlist" Multiplicity="0..1" />
+    <End Role="userlist" Type="Self.userlist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="commonlist">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="userlist">
+        <PropertyRef Name="listid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_userlist_user">
+    <End Role="user" Type="Self.user" Multiplicity="1" />
+    <End Role="userlist" Type="Self.userlist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="userlist">
+        <PropertyRef Name="userid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_userlocation_user">
+    <End Role="user" Type="Self.user" Multiplicity="1" />
+    <End Role="userlocation" Type="Self.userlocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="userlocation">
+        <PropertyRef Name="userid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="listswypeModelStoreContainer">
+    <EntitySet Name="commonlist" EntityType="Self.commonlist" Schema="listswype" store:Type="Tables" />
+    <EntitySet Name="customlist" EntityType="Self.customlist" Schema="listswype" store:Type="Tables" />
+    <EntitySet Name="user" EntityType="Self.user" Schema="listswype" store:Type="Tables" />
+    <EntitySet Name="userconnection" EntityType="Self.userconnection" Schema="listswype" store:Type="Tables" />
+    <EntitySet Name="userlist" EntityType="Self.userlist" Schema="listswype" store:Type="Tables" />
+    <EntitySet Name="userlocation" EntityType="Self.userlocation" Schema="listswype" store:Type="Tables" />
+    <AssociationSet Name="fk_connection_user_1" Association="Self.fk_connection_user_1">
+      <End Role="user" EntitySet="user" />
+      <End Role="userconnection" EntitySet="userconnection" />
+    </AssociationSet>
+    <AssociationSet Name="fk_connection_user_2" Association="Self.fk_connection_user_2">
+      <End Role="user" EntitySet="user" />
+      <End Role="userconnection" EntitySet="userconnection" />
+    </AssociationSet>
+    <AssociationSet Name="fk_customlist_user" Association="Self.fk_customlist_user">
+      <End Role="user" EntitySet="user" />
+      <End Role="customlist" EntitySet="customlist" />
+    </AssociationSet>
+    <AssociationSet Name="fk_userlist_custom" Association="Self.fk_userlist_custom">
+      <End Role="customlist" EntitySet="customlist" />
+      <End Role="userlist" EntitySet="userlist" />
+    </AssociationSet>
+    <AssociationSet Name="fk_userlist_list" Association="Self.fk_userlist_list">
+      <End Role="commonlist" EntitySet="commonlist" />
+      <End Role="userlist" EntitySet="userlist" />
+    </AssociationSet>
+    <AssociationSet Name="fk_userlist_user" Association="Self.fk_userlist_user">
+      <End Role="user" EntitySet="user" />
+      <End Role="userlist" EntitySet="userlist" />
+    </AssociationSet>
+    <AssociationSet Name="fk_userlocation_user" Association="Self.fk_userlocation_user">
+      <End Role="user" EntitySet="user" />
+      <End Role="userlocation" EntitySet="userlocation" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
