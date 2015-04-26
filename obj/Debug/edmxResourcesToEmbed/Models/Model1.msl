@@ -4,6 +4,7 @@
     <EntitySetMapping Name="commonlists">
       <EntityTypeMapping TypeName="listswypeModel.commonlist">
         <MappingFragment StoreEntitySet="commonlist">
+          <ScalarProperty Name="UniqueID" ColumnName="UniqueID" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="ItemName" ColumnName="ItemName" />
           <ScalarProperty Name="ItemImage" ColumnName="ItemImage" />
@@ -13,8 +14,9 @@
     <EntitySetMapping Name="customlists">
       <EntityTypeMapping TypeName="listswypeModel.customlist">
         <MappingFragment StoreEntitySet="customlist">
+          <ScalarProperty Name="uniqueid" ColumnName="uniqueid" />
+          <ScalarProperty Name="useremail" ColumnName="useremail" />
           <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="userid" ColumnName="userid" />
           <ScalarProperty Name="itemname" ColumnName="itemname" />
           <ScalarProperty Name="itemimage" ColumnName="itemimage" />
         </MappingFragment>
@@ -23,19 +25,10 @@
     <EntitySetMapping Name="users">
       <EntityTypeMapping TypeName="listswypeModel.user">
         <MappingFragment StoreEntitySet="user">
-          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ConnectionEmail" ColumnName="ConnectionEmail" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />
           <ScalarProperty Name="Email" ColumnName="Email" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="userconnections">
-      <EntityTypeMapping TypeName="listswypeModel.userconnection">
-        <MappingFragment StoreEntitySet="userconnection">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="userid" ColumnName="userid" />
-          <ScalarProperty Name="connectionid" ColumnName="connectionid" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -43,17 +36,16 @@
       <EntityTypeMapping TypeName="listswypeModel.userlist">
         <MappingFragment StoreEntitySet="userlist">
           <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="userid" ColumnName="userid" />
-          <ScalarProperty Name="listid" ColumnName="listid" />
-          <ScalarProperty Name="customitemid" ColumnName="customitemid" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="itemid" ColumnName="itemid" />
+          <ScalarProperty Name="useremail" ColumnName="useremail" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="userlocations">
       <EntityTypeMapping TypeName="listswypeModel.userlocation">
         <MappingFragment StoreEntitySet="userlocation">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="useremail" ColumnName="useremail" />
           <ScalarProperty Name="locationname" ColumnName="locationname" />
           <ScalarProperty Name="locationcoord" ColumnName="locationcoord" />
         </MappingFragment>

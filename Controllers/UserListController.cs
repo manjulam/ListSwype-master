@@ -9,110 +9,40 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using ListSwype.Models;
+using ListSwype.DTO;
+using ListSwype.Repository;
 
 namespace ListSwype.Controllers
 {
     public class UserListController : ApiController
     {
+        private ListSwypeRepository _listRepository;
         private listswypeEntities db = new listswypeEntities();
 
-        // GET: api/UserList
-        public IQueryable<userlist> Getuserlists()
+        public UserListController()
         {
-            return db.userlists;
+            this._listRepository = new ListSwypeRepository();
         }
 
-        // GET: api/UserList/5
-        [ResponseType(typeof(userlist))]
-        public IHttpActionResult Getuserlist(int id)
+        // GET: api/userlist/name@example.com/
+        public List<UserListItemDTO> GetUserList(string email)
         {
-            userlist userlist = db.userlists.Find(id);
-            if (userlist == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(userlist);
+            return _listRepository.GetUserListItemsByEmail(email);
         }
 
-        // PUT: api/UserList/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult Putuserlist(int id, userlist userlist)
+        // POST: api/userlist
+        public string Post([FromBody]UserListItemDTO item)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != userlist.id)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(userlist).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!userlistExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
+            return _listRepository.SaveUserListItem(item);
         }
 
-        // POST: api/UserList
-        [ResponseType(typeof(userlist))]
-        public IHttpActionResult Postuserlist(userlist userlist)
+        // DELETE: api/User/uniqueid/
+        [HttpDelete]
+        [ActionName("DeleteUserListItem")]
+        public bool DeleteUserListItem(string uniqueid)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.userlists.Add(userlist);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = userlist.id }, userlist);
+            return _listRepository.DeleteUserListItemByUniqueID(uniqueid);
         }
 
-        // DELETE: api/UserList/5
-        [ResponseType(typeof(userlist))]
-        public IHttpActionResult Deleteuserlist(int id)
-        {
-            userlist userlist = db.userlists.Find(id);
-            if (userlist == null)
-            {
-                return NotFound();
-            }
-
-            db.userlists.Remove(userlist);
-            db.SaveChanges();
-
-            return Ok(userlist);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool userlistExists(int id)
-        {
-            return db.userlists.Count(e => e.id == id) > 0;
-        }
     }
 }

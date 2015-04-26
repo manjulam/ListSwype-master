@@ -7,41 +7,40 @@ using ListSwype.Base;
 
 namespace ListSwype.DTO
 {
-    public class UserDTO:BaseDTO
+    public class ListItemDTO : BaseDTO
     {
-      
         /// <summary>
-        /// Gets or sets the FirstName field
+        /// Gets or sets the Id field
         /// </summary>
         [DataMember]
-        public string FirstName
+        public int ID
         {
             get;
             set;
         }
         /// <summary>
-        /// Gets or sets the LastName field
+        /// Gets or sets the ItemName field
         /// </summary>
         [DataMember]
-        public string LastName
+        public string ItemName
         {
             get;
             set;
         }
         /// <summary>
-        /// Gets or sets the Email field
+        /// Gets or sets the ItemImage field
         /// </summary>
         [DataMember]
-        public string Email
+        public string ItemImage
         {
             get;
             set;
         }
         /// <summary>
-        /// Gets or sets the ConnectionEmail field
+        /// Gets or sets the UniqueID field
         /// </summary>
         [DataMember]
-        public string ConnectionEmail
+        public string UniqueID
         {
             get;
             set;

@@ -7,183 +7,49 @@
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ItemName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="ItemImage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="userlists" Relationship="Self.fk_userlist_list" FromRole="commonlist" ToRole="userlist" />
+    <Property Name="UniqueID" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="customlist">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="userid" Type="Int32" Nullable="false" />
     <Property Name="itemname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="itemimage" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="user" Relationship="Self.fk_customlist_user" FromRole="customlist" ToRole="user" />
-    <NavigationProperty Name="userlists" Relationship="Self.fk_userlist_custom" FromRole="customlist" ToRole="userlist" />
+    <Property Name="useremail" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="uniqueid" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="user">
     <Key>
-      <PropertyRef Name="ID" />
+      <PropertyRef Name="Email" />
     </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="FirstName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="LastName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="customlists" Relationship="Self.fk_customlist_user" FromRole="user" ToRole="customlist" />
-    <NavigationProperty Name="userconnections" Relationship="Self.fk_connection_user_1" FromRole="user" ToRole="userconnection" />
-    <NavigationProperty Name="userconnections1" Relationship="Self.fk_connection_user_2" FromRole="user" ToRole="userconnection" />
-    <NavigationProperty Name="userlists" Relationship="Self.fk_userlist_user" FromRole="user" ToRole="userlist" />
-    <NavigationProperty Name="userlocations" Relationship="Self.fk_userlocation_user" FromRole="user" ToRole="userlocation" />
-  </EntityType>
-  <EntityType Name="userconnection">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="userid" Type="Int32" Nullable="false" />
-    <Property Name="connectionid" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="user" Relationship="Self.fk_connection_user_1" FromRole="userconnection" ToRole="user" />
-    <NavigationProperty Name="user1" Relationship="Self.fk_connection_user_2" FromRole="userconnection" ToRole="user" />
+    <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ConnectionEmail" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="userlist">
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="userid" Type="Int32" Nullable="false" />
-    <Property Name="listid" Type="Int32" />
-    <Property Name="customitemid" Type="Int32" />
-    <NavigationProperty Name="commonlist" Relationship="Self.fk_userlist_list" FromRole="userlist" ToRole="commonlist" />
-    <NavigationProperty Name="customlist" Relationship="Self.fk_userlist_custom" FromRole="userlist" ToRole="customlist" />
-    <NavigationProperty Name="user" Relationship="Self.fk_userlist_user" FromRole="userlist" ToRole="user" />
+    <Property Name="useremail" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="itemid" Type="String" Nullable="false" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Name="type" Type="String" Nullable="false" />
+    <Property Name="id" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="userlocation">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="useremail" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="userid" Type="Int32" Nullable="false" />
     <Property Name="locationname" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="locationcoord" Type="Decimal" />
-    <NavigationProperty Name="user" Relationship="Self.fk_userlocation_user" FromRole="userlocation" ToRole="user" />
+    <Property Name="useremail" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
   </EntityType>
-  <Association Name="fk_userlist_list">
-    <End Role="commonlist" Type="Self.commonlist" Multiplicity="0..1" />
-    <End Role="userlist" Type="Self.userlist" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="commonlist">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="userlist">
-        <PropertyRef Name="listid" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="fk_customlist_user">
-    <End Role="user" Type="Self.user" Multiplicity="1" />
-    <End Role="customlist" Type="Self.customlist" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="user">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="customlist">
-        <PropertyRef Name="userid" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="fk_userlist_custom">
-    <End Role="customlist" Type="Self.customlist" Multiplicity="0..1" />
-    <End Role="userlist" Type="Self.userlist" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="customlist">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="userlist">
-        <PropertyRef Name="customitemid" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="fk_connection_user_1">
-    <End Role="user" Type="Self.user" Multiplicity="1" />
-    <End Role="userconnection" Type="Self.userconnection" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="user">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="userconnection">
-        <PropertyRef Name="userid" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="fk_connection_user_2">
-    <End Role="user" Type="Self.user" Multiplicity="1" />
-    <End Role="userconnection" Type="Self.userconnection" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="user">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="userconnection">
-        <PropertyRef Name="connectionid" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="fk_userlist_user">
-    <End Role="user" Type="Self.user" Multiplicity="1" />
-    <End Role="userlist" Type="Self.userlist" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="user">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="userlist">
-        <PropertyRef Name="userid" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="fk_userlocation_user">
-    <End Role="user" Type="Self.user" Multiplicity="1" />
-    <End Role="userlocation" Type="Self.userlocation" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="user">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="userlocation">
-        <PropertyRef Name="userid" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="listswypeEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="commonlists" EntityType="Self.commonlist" />
     <EntitySet Name="customlists" EntityType="Self.customlist" />
     <EntitySet Name="users" EntityType="Self.user" />
-    <EntitySet Name="userconnections" EntityType="Self.userconnection" />
     <EntitySet Name="userlists" EntityType="Self.userlist" />
     <EntitySet Name="userlocations" EntityType="Self.userlocation" />
-    <AssociationSet Name="fk_userlist_list" Association="Self.fk_userlist_list">
-      <End Role="commonlist" EntitySet="commonlists" />
-      <End Role="userlist" EntitySet="userlists" />
-    </AssociationSet>
-    <AssociationSet Name="fk_customlist_user" Association="Self.fk_customlist_user">
-      <End Role="user" EntitySet="users" />
-      <End Role="customlist" EntitySet="customlists" />
-    </AssociationSet>
-    <AssociationSet Name="fk_userlist_custom" Association="Self.fk_userlist_custom">
-      <End Role="customlist" EntitySet="customlists" />
-      <End Role="userlist" EntitySet="userlists" />
-    </AssociationSet>
-    <AssociationSet Name="fk_connection_user_1" Association="Self.fk_connection_user_1">
-      <End Role="user" EntitySet="users" />
-      <End Role="userconnection" EntitySet="userconnections" />
-    </AssociationSet>
-    <AssociationSet Name="fk_connection_user_2" Association="Self.fk_connection_user_2">
-      <End Role="user" EntitySet="users" />
-      <End Role="userconnection" EntitySet="userconnections" />
-    </AssociationSet>
-    <AssociationSet Name="fk_userlist_user" Association="Self.fk_userlist_user">
-      <End Role="user" EntitySet="users" />
-      <End Role="userlist" EntitySet="userlists" />
-    </AssociationSet>
-    <AssociationSet Name="fk_userlocation_user" Association="Self.fk_userlocation_user">
-      <End Role="user" EntitySet="users" />
-      <End Role="userlocation" EntitySet="userlocations" />
-    </AssociationSet>
   </EntityContainer>
 </Schema>

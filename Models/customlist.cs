@@ -14,17 +14,10 @@ namespace ListSwype.Models
     
     public partial class customlist
     {
-        public customlist()
-        {
-            this.userlists = new HashSet<userlist>();
-        }
-    
         public int id { get; set; }
-        public int userid { get; set; }
         public string itemname { get; set; }
         public string itemimage { get; set; }
-    
-        public virtual user user { get; set; }
-        public virtual ICollection<userlist> userlists { get; set; }
+        public string useremail { get; set; }
+        public string uniqueid { get; set; }
     }
 }

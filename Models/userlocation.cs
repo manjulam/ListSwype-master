@@ -14,11 +14,8 @@ namespace ListSwype.Models
     
     public partial class userlocation
     {
-        public int id { get; set; }
-        public int userid { get; set; }
         public string locationname { get; set; }
         public Nullable<decimal> locationcoord { get; set; }
-    
-        public virtual user user { get; set; }
+        public string useremail { get; set; }
     }
 }

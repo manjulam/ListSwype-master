@@ -28,7 +28,6 @@ namespace ListSwype.Models
         public DbSet<commonlist> commonlists { get; set; }
         public DbSet<customlist> customlists { get; set; }
         public DbSet<user> users { get; set; }
-        public DbSet<userconnection> userconnections { get; set; }
         public DbSet<userlist> userlists { get; set; }
         public DbSet<userlocation> userlocations { get; set; }
     }

@@ -14,15 +14,9 @@ namespace ListSwype.Models
     
     public partial class commonlist
     {
-        public commonlist()
-        {
-            this.userlists = new HashSet<userlist>();
-        }
-    
         public int ID { get; set; }
         public string ItemName { get; set; }
         public string ItemImage { get; set; }
-    
-        public virtual ICollection<userlist> userlists { get; set; }
+        public string UniqueID { get; set; }
     }
 }

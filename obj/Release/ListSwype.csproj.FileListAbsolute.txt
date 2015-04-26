@@ -29,3 +29,17 @@ C:\PersonalProjects\ListSwype-master\bin\System.Web.Http.WebHost.xml
 C:\PersonalProjects\ListSwype-master\obj\Release\ListSwype.csprojResolveAssemblyReference.cache
 C:\PersonalProjects\ListSwype-master\obj\Release\ListSwype.dll
 C:\PersonalProjects\ListSwype-master\obj\Release\ListSwype.pdb
+C:\Projects\ListSwypeWebAPI\ListSwype-master\bin\ListSwype.dll.config
+C:\Projects\ListSwypeWebAPI\ListSwype-master\bin\ListSwype.dll
+C:\Projects\ListSwypeWebAPI\ListSwype-master\bin\ListSwype.pdb
+C:\Projects\ListSwypeWebAPI\ListSwype-master\bin\Newtonsoft.Json.dll
+C:\Projects\ListSwypeWebAPI\ListSwype-master\bin\System.Net.Http.Formatting.dll
+C:\Projects\ListSwypeWebAPI\ListSwype-master\bin\System.Web.Http.dll
+C:\Projects\ListSwypeWebAPI\ListSwype-master\bin\System.Web.Http.WebHost.dll
+C:\Projects\ListSwypeWebAPI\ListSwype-master\bin\Newtonsoft.Json.xml
+C:\Projects\ListSwypeWebAPI\ListSwype-master\bin\System.Net.Http.Formatting.xml
+C:\Projects\ListSwypeWebAPI\ListSwype-master\bin\System.Web.Http.xml
+C:\Projects\ListSwypeWebAPI\ListSwype-master\bin\System.Web.Http.WebHost.xml
+C:\Projects\ListSwypeWebAPI\ListSwype-master\obj\Release\ListSwype.csprojResolveAssemblyReference.cache
+C:\Projects\ListSwypeWebAPI\ListSwype-master\obj\Release\ListSwype.dll
+C:\Projects\ListSwypeWebAPI\ListSwype-master\obj\Release\ListSwype.pdb

@@ -24,16 +24,8 @@ namespace ListSwype.Controllers
             this._listRepository = new ListSwypeRepository();
         }
 
-        // GET: api/User/5
-        public UserDTO GetUser(int id)
-        {
-            return _listRepository.GetUserbyId(id);
-        }
-
-        // GET: api/User/getuserbyemail/name@example.com/
-        [HttpGet]
-        [ActionName("GetUserByEmail")]
-        public UserDTO GetUserByEmail(string  email)
+        // GET: api/User/name@example.com/
+        public UserDTO GetUser(string  email)
         {
             return _listRepository.GetUserbyEmail(email);
         }
@@ -44,16 +36,8 @@ namespace ListSwype.Controllers
             return _listRepository.SaveUser(user);
         }
 
-        // DELETE: api/User/5
-        public bool DeleteUser(int id)
-        {
-            return _listRepository.DeleteUserByID(id);
-        }
-
-        // DELETE: api/User/deleteuserbyemail/name@example.com/
-        [HttpDelete]
-        [ActionName("DeleteUserByEmail")]
-        public bool DeleteUserByEmail(string email)
+        // DELETE: api/User/name@example.com/
+        public bool DeleteUser(string email)
         {
             return _listRepository.DeleteUserByEmail(email);
         }

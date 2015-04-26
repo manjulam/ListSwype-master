@@ -16,14 +16,15 @@ namespace ListSwype
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                routeTemplate: "api/{controller}/{email}",
+                defaults: new { email = RouteParameter.Optional }
             );
+
 
             config.Routes.MapHttpRoute(
                 name: "ActionApi",
-                routeTemplate: "api/{controller}/{action}/{email}",
-                defaults: new { email = RouteParameter.Optional }
+                routeTemplate: "api/{controller}/{action}/{uniqueid}",
+                defaults: new { uniqueid = RouteParameter.Optional }
            );
          
         }

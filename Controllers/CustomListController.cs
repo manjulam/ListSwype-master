@@ -9,110 +9,33 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using ListSwype.Models;
+using ListSwype.DTO;
+using ListSwype.Repository;
 
 namespace ListSwype.Controllers
 {
     public class CustomListController : ApiController
     {
-        private listswypeEntities db = new listswypeEntities();
+       private ListSwypeRepository _listRepository;
+       private listswypeEntities db = new listswypeEntities();
 
-        // GET: api/CustomList
-        public IQueryable<customlist> Getcustomlists()
+       public CustomListController()
         {
-            return db.customlists;
+            this._listRepository = new ListSwypeRepository();
         }
 
-        // GET: api/CustomList/5
-        [ResponseType(typeof(customlist))]
-        public IHttpActionResult Getcustomlist(int id)
+        // GET: api/User/name@example.com/
+        public List<CustomItemDTO> GetCustomItems(string  email)
         {
-            customlist customlist = db.customlists.Find(id);
-            if (customlist == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(customlist);
+            return _listRepository.GetCustomItemsByEmail(email);
         }
 
-        // PUT: api/CustomList/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult Putcustomlist(int id, customlist customlist)
+        // POST: api/User
+        public bool Post([FromBody]CustomItemDTO item)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != customlist.id)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(customlist).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!customlistExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
+            return _listRepository.SaveCustomItem(item);
         }
 
-        // POST: api/CustomList
-        [ResponseType(typeof(customlist))]
-        public IHttpActionResult Postcustomlist(customlist customlist)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.customlists.Add(customlist);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = customlist.id }, customlist);
-        }
-
-        // DELETE: api/CustomList/5
-        [ResponseType(typeof(customlist))]
-        public IHttpActionResult Deletecustomlist(int id)
-        {
-            customlist customlist = db.customlists.Find(id);
-            if (customlist == null)
-            {
-                return NotFound();
-            }
-
-            db.customlists.Remove(customlist);
-            db.SaveChanges();
-
-            return Ok(customlist);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool customlistExists(int id)
-        {
-            return db.customlists.Count(e => e.id == id) > 0;
-        }
+        
     }
 }

@@ -14,13 +14,9 @@ namespace ListSwype.Models
     
     public partial class userlist
     {
+        public string useremail { get; set; }
+        public string itemid { get; set; }
+        public string type { get; set; }
         public int id { get; set; }
-        public int userid { get; set; }
-        public Nullable<int> listid { get; set; }
-        public Nullable<int> customitemid { get; set; }
-    
-        public virtual commonlist commonlist { get; set; }
-        public virtual customlist customlist { get; set; }
-        public virtual user user { get; set; }
     }
 }

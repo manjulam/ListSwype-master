@@ -90,9 +90,11 @@
     <Compile Include="Controllers\UserConnectionController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserListController.cs" />
-    <Compile Include="Controllers\UserLocationController.cs" />
     <Compile Include="Base\BaseDTO.cs" />
+    <Compile Include="DTO\CustomItemDTO.cs" />
+    <Compile Include="DTO\ListItemDTO.cs" />
     <Compile Include="DTO\UserDTO.cs" />
+    <Compile Include="DTO\UserListItemDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -118,9 +120,6 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\user.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\userconnection.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\userlist.cs">
