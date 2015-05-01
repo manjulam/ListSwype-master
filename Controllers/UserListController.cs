@@ -39,9 +39,9 @@ namespace ListSwype.Controllers
         // DELETE: api/User/uniqueid/
         [HttpDelete]
         [ActionName("DeleteUserListItem")]
-        public bool DeleteUserListItem(string uniqueid)
+        public string DeleteUserListItem(string uniqueid,string email)
         {
-            return _listRepository.DeleteUserListItemByUniqueID(uniqueid);
+            return _listRepository.DeleteUserListItemByUniqueID(uniqueid,email);
         }
 
     }

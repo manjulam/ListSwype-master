@@ -215,8 +215,13 @@ namespace ListSwype.Repository
             using (listswypeEntities context = new listswypeEntities())
             {
                 // Build the LINQ query 
+                string connectionEmail = context.users.Where(u => u.Email == email).FirstOrDefault().ConnectionEmail;
+                var list = context.customlists.Where(c => c.useremail == email).Distinct();
+                if ((!(string.IsNullOrEmpty(connectionEmail))))
+                {
+                    list = context.customlists.Where(c => c.useremail == email || c.useremail == connectionEmail).Distinct();
+                }
 
-                var list = context.customlists.Where(c=>c.useremail==email);
                 List<CustomItemDTO> listItems = new List<CustomItemDTO>();
 
                 if (list != null)
@@ -233,9 +238,9 @@ namespace ListSwype.Repository
         /// <summary>
         /// saves a custom item
         /// </summary>
-        /// <returns>true/false</returns>
+        /// <returns>string</returns>
 
-        internal bool SaveCustomItem(CustomItemDTO item)
+        internal string SaveCustomItem(CustomItemDTO item)
         {
             try
             {
@@ -249,13 +254,13 @@ namespace ListSwype.Repository
                     customItem.itemname = item.itemname;
                     context.customlists.Add(customItem);
                     context.SaveChanges();
-                    return true;
+                    return "success";
                 }
             }
 
             catch (Exception ex)
             {
-                return false;
+                return "failed";
                 //return ex.Message + ',' + ex.InnerException.Message + ',' + ex.InnerException.InnerException.Message;
             }
         }
@@ -273,8 +278,12 @@ namespace ListSwype.Repository
             using (listswypeEntities context = new listswypeEntities())
             {
                 // Build the LINQ query 
-
-                var list = context.userlists.Where(c => c.useremail == email);
+                string connectionEmail = context.users.Where(u => u.Email == email).FirstOrDefault().ConnectionEmail;
+                var list = context.userlists.Where(c => c.useremail == email).Distinct();
+                if((!(string.IsNullOrEmpty(connectionEmail))))
+                {
+                    list = context.userlists.Where(c => c.useremail == email || c.useremail == connectionEmail).Distinct();
+                }
                 List<UserListItemDTO> listItems = new List<UserListItemDTO>();
 
                 if (list != null)
@@ -324,23 +333,23 @@ namespace ListSwype.Repository
         /// <param name="uniqueid">unique id of the item</param>
         /// <returns>true/false</returns>
 
-        internal bool DeleteUserListItemByUniqueID(string uniqueid)
+        internal string DeleteUserListItemByUniqueID(string uniqueid,string email)
         {
+            
             using (listswypeEntities context = new listswypeEntities())
             {
                 // Build the LINQ query 
-
-                var item = context.userlists.Where(u => u.itemid == uniqueid).FirstOrDefault();
-
+                var item = context.userlists.Where(u => u.itemid == uniqueid && u.useremail == email).FirstOrDefault();
+                
                 if (item != null)
                 {
                     context.userlists.Remove(item);
                     context.SaveChanges();
-                    return true;
+                    return "success";
                 }
                 else
                 {
-                    return false;
+                    return "failed";
                 }
             }
         }

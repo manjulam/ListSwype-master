@@ -31,7 +31,7 @@ namespace ListSwype.Controllers
         }
 
         // POST: api/User
-        public bool Post([FromBody]CustomItemDTO item)
+        public string Post([FromBody]CustomItemDTO item)
         {
             return _listRepository.SaveCustomItem(item);
         }

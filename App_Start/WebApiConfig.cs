@@ -23,7 +23,7 @@ namespace ListSwype
 
             config.Routes.MapHttpRoute(
                 name: "ActionApi",
-                routeTemplate: "api/{controller}/{action}/{uniqueid}",
+                routeTemplate: "api/{controller}/{action}/{uniqueid}/{email}",
                 defaults: new { uniqueid = RouteParameter.Optional }
            );
          
